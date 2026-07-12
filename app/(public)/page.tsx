@@ -1,7 +1,19 @@
-export default function Home() {
+import { Hero } from "@/components/sections/Hero";
+import { Stats } from "@/components/sections/Stats";
+import { About } from "@/components/sections/About";
+import { Skills } from "@/components/sections/Skills";
+import { Timeline } from "@/components/sections/Timeline";
+import { GithubActivity } from "@/components/sections/GithubActivity";
+
+export default function HomePage() {
   return (
-    <div className="mx-auto max-w-6xl px-6 py-24">
-      <h1 className="font-display text-4xl">Hero goes here</h1>
-    </div>
+    <>
+      <Hero />
+      <Stats />
+      <About />
+      <Skills />
+      <Timeline />
+      <GithubActivity />
+    </>
   );
 }
