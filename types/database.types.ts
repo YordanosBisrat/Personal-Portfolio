@@ -194,6 +194,54 @@ export type Database = {
         }
         Relationships: []
       }
+      statistics: {
+        Row: {
+          id: string
+          label: string
+          sort_order: number
+          suffix: string | null
+          value: number
+        }
+        Insert: {
+          id?: string
+          label: string
+          sort_order?: number
+          suffix?: string | null
+          value: number
+        }
+        Update: {
+          id?: string
+          label?: string
+          sort_order?: number
+          suffix?: string | null
+          value?: number
+        }
+        Relationships: []
+      }
+      timeline: {
+        Row: {
+          date: string
+          description: string | null
+          id: string
+          label: string
+          sort_order: number
+        }
+        Insert: {
+          date: string
+          description?: string | null
+          id?: string
+          label: string
+          sort_order?: number
+        }
+        Update: {
+          date?: string
+          description?: string | null
+          id?: string
+          label?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

@@ -1,6 +1,6 @@
-import { timeline } from "@/lib/mock-data";
+import type { TimelineItem } from "@/types/content";
 
-export function Timeline() {
+export function Timeline({ timeline }: { timeline: TimelineItem[] }) {
   return (
     <section id="timeline" className="px-6 py-24">
       <div className="mx-auto max-w-3xl">

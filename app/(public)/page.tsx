@@ -6,21 +6,25 @@ import { Timeline } from "@/components/sections/Timeline";
 import { GithubActivity } from "@/components/sections/GithubActivity";
 import { getProfile, getSocialLinks } from "@/features/profile/services";
 import { getSkills } from "@/features/skills/services";
+import { getTimeline } from "@/features/timeline/services";
+import { getStatistics } from "@/features/statistics/services";
 
 export default async function HomePage() {
-  const [profile, socialLinks, skills] = await Promise.all([
+  const [profile, socialLinks, skills, timeline, statistics] = await Promise.all([
     getProfile(),
     getSocialLinks(),
     getSkills(),
+    getTimeline(),
+    getStatistics(),
   ]);
 
   return (
     <>
       <Hero profile={profile} socialLinks={socialLinks} />
-      <Stats />
+      <Stats statistics={statistics} />
       <About profile={profile} />
       <Skills skills={skills} />
-      <Timeline />
+      <Timeline timeline={timeline} />
       <GithubActivity />
     </>
   );

@@ -1,9 +1,9 @@
 "use client";
 
-import { statistics } from "@/lib/mock-data";
+import type { Statistic } from "@/types/content";
 import { useCountUp } from "@/hooks/use-count-up";
 
-function StatCard({ label, value, suffix }: { label: string; value: number; suffix?: string }) {
+function StatCard({ label, value, suffix }: Statistic) {
   const { ref, value: animated } = useCountUp(value);
   return (
     <div ref={ref} className="glass-card p-6 text-center">
@@ -16,7 +16,7 @@ function StatCard({ label, value, suffix }: { label: string; value: number; suff
   );
 }
 
-export function Stats() {
+export function Stats({ statistics }: { statistics: Statistic[] }) {
   return (
     <section className="px-6 py-24">
       <div className="mx-auto grid max-w-6xl grid-cols-2 gap-4 md:grid-cols-5">
