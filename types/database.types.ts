@@ -83,6 +83,69 @@ export type Database = {
         }
         Relationships: []
       }
+      projects: {
+        Row: {
+          category: string
+          challenges: string
+          cover_image_url: string | null
+          demo_url: string | null
+          features: Json
+          github_url: string | null
+          id: string
+          is_featured: boolean
+          lessons: string
+          problem: string
+          published_at: string | null
+          slug: string
+          solution: string
+          sort_order: number
+          status: string
+          summary: string
+          tech_stack: Json
+          title: string
+        }
+        Insert: {
+          category: string
+          challenges: string
+          cover_image_url?: string | null
+          demo_url?: string | null
+          features?: Json
+          github_url?: string | null
+          id?: string
+          is_featured?: boolean
+          lessons: string
+          problem: string
+          published_at?: string | null
+          slug: string
+          solution: string
+          sort_order?: number
+          status?: string
+          summary: string
+          tech_stack?: Json
+          title: string
+        }
+        Update: {
+          category?: string
+          challenges?: string
+          cover_image_url?: string | null
+          demo_url?: string | null
+          features?: Json
+          github_url?: string | null
+          id?: string
+          is_featured?: boolean
+          lessons?: string
+          problem?: string
+          published_at?: string | null
+          slug?: string
+          solution?: string
+          sort_order?: number
+          status?: string
+          summary?: string
+          tech_stack?: Json
+          title?: string
+        }
+        Relationships: []
+      }
       skills: {
         Row: {
           category: string

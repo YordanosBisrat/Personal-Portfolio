@@ -2,23 +2,25 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
-import { projects } from "@/lib/mock-data";
 import type { Metadata } from "next";
+import { getProjects, getProjectBySlug } from "@/features/projects/services";
+import type { Project } from "@/types/content";
 
 export async function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  const projects = await getProjects();
+  return projects.map((p: Project) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) return {};
   return { title: project.title, description: project.summary };
 }
 
 export default async function ProjectCaseStudyPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const project = projects.find((p) => p.slug === slug);
+  const project = await getProjectBySlug(slug);
   if (!project) notFound();
 
   return (
@@ -56,7 +58,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         <section>
           <h2 className="font-display text-xl">Features</h2>
           <ul className="mt-2 space-y-1">
-            {project.features.map((f) => (
+            {project.features.map((f: string) => (
               <li key={f} className="text-foreground-secondary">— {f}</li>
             ))}
           </ul>
@@ -72,7 +74,7 @@ export default async function ProjectCaseStudyPage({ params }: { params: Promise
         <section>
           <h2 className="font-display text-xl">Tech Stack</h2>
           <div className="mt-3 flex flex-wrap gap-2">
-            {project.techStack.map((tech) => (
+            {project.techStack.map((tech: string) => (
               <span key={tech} className="rounded-full border px-3 py-1 text-sm text-foreground-secondary" style={{ borderColor: "var(--color-border-glass)" }}>
                 {tech}
               </span>
