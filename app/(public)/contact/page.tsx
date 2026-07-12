@@ -1,12 +1,14 @@
 import { ContactForm } from "@/components/contact/ContactForm";
 import { Mail, MapPin } from "lucide-react";
-import { profile } from "@/lib/mock-data";
+import { getProfile } from "@/features/profile/services";
 
-export default function ContactPage() {
+export default async function ContactPage() {
+  const profile = await getProfile();
+
   return (
     <div className="mx-auto max-w-3xl px-6 py-24">
       <p className="text-sm uppercase tracking-widest text-foreground-secondary">Contact</p>
-<h1 className="mt-2 font-display text-3xl md:text-4xl">Let&apos;s talk</h1>
+      <h1 className="mt-2 font-display text-3xl md:text-4xl">Let&apos;s talk</h1>
       <p className="mt-4 max-w-xl text-foreground-secondary">
         Have a project in mind, an internship opportunity, or just want to connect? Send a message below.
       </p>
