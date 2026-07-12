@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { skills } from "@/lib/mock-data";
-import type { SkillCategory } from "@/types/content";
+import type { Skill, SkillCategory } from "@/types/content";
 
 const categories: { key: SkillCategory | "all"; label: string }[] = [
   { key: "all", label: "All" },
@@ -46,7 +45,7 @@ function SkillRing({ percentage }: { percentage: number }) {
   );
 }
 
-export function Skills() {
+export function Skills({ skills }: { skills: Skill[] }) {
   const [active, setActive] = useState<SkillCategory | "all">("all");
   const filtered = active === "all" ? skills : skills.filter((s) => s.category === active);
 

@@ -1,7 +1,7 @@
-import { profile } from "@/lib/mock-data";
+import type { Profile } from "@/types/content";
 import { GraduationCap, Target } from "lucide-react";
 
-export function About() {
+export function About({ profile }: { profile: Profile }) {
   return (
     <section id="about" className="px-6 py-24">
       <div className="mx-auto max-w-4xl">

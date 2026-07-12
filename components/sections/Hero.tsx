@@ -7,7 +7,7 @@ import { Code2, ArrowRight, Download, Mail } from "lucide-react";
 import { useTypewriter } from "@/hooks/use-typewriter";
 import { MagneticButton } from "@/components/effects/MagneticButton";
 import { GradientBlobs } from "@/components/effects/GradientBlobs";
-import { profile, socialLinks } from "@/lib/mock-data";
+import type { Profile, SocialLink } from "@/types/content";
 
 const roles = [
   "Software Engineering Student",
@@ -16,7 +16,12 @@ const roles = [
   "Software Engineer",
 ];
 
-export function Hero() {
+interface HeroProps {
+  profile: Profile;
+  socialLinks: SocialLink[];
+}
+
+export function Hero({ profile, socialLinks }: HeroProps) {
   const typedRole = useTypewriter({ words: roles });
 
   return (
