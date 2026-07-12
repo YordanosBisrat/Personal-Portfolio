@@ -2,18 +2,10 @@
 
 import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import { useState } from "react";
 import { Send, CheckCircle2 } from "lucide-react";
+import { contactSchema, type ContactValues } from "@/features/contact/schema";
 
-const contactSchema = z.object({
-  name: z.string().min(2, "Name is too short"),
-  email: z.string().email("Enter a valid email"),
-  subject: z.string().min(3, "Subject is too short"),
-  message: z.string().min(10, "Message should be at least 10 characters"),
-});
-
-type ContactValues = z.infer<typeof contactSchema>;
 
 export function ContactForm() {
   const [submitted, setSubmitted] = useState(false);
@@ -31,13 +23,27 @@ export function ContactForm() {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolver: zodResolver(contactSchema as any) as Resolver<ContactValues>,
     });
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
   const onSubmit = async (values: ContactValues) => {
-    // Phase 5: POST to /api/contact, which inserts into contact_messages via the server Supabase client.
-    await new Promise((resolve) => setTimeout(resolve, 600));
-    console.log("Contact form submitted:", values);
-    setSubmitted(true);
-    reset();
-  };
+    setSubmitError(null);
+    try {
+        const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(values),
+        });
+
+        if (!res.ok) {
+        throw new Error("Submission failed");
+        }
+
+        setSubmitted(true);
+        reset();
+    } catch {
+        setSubmitError("Something went wrong sending your message. Please try again.");
+    }
+    };
 
   if (submitted) {
     return (
@@ -77,6 +83,11 @@ export function ContactForm() {
         <textarea id="message" rows={5} {...register("message")} className="focus-ring mt-1.5 w-full rounded-lg border bg-transparent px-4 py-2.5 text-sm" style={{ borderColor: "var(--color-border-glass)" }} />
         {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>}
       </div>
+      {submitError && <p className="text-sm text-red-400">{submitError}</p>}
+
+      <button type="submit" disabled={isSubmitting} className="focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium disabled:opacity-60" style={{ backgroundColor: "var(--color-accent)", color: "#151311" }}>
+        {isSubmitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
+      </button>
 
       <button type="submit" disabled={isSubmitting} className="focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium disabled:opacity-60" style={{ backgroundColor: "var(--color-accent)", color: "#151311" }}>
         {isSubmitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
