@@ -90,3 +90,19 @@
     outline-offset: 2px;
   }
 }
+
+@keyframes blob-float-slow {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, -20px) scale(1.05); }
+}
+@keyframes blob-float-slower {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-20px, 30px) scale(1.08); }
+}
+.animate-blob-float-slow { animation: blob-float-slow 18s ease-in-out infinite; }
+.animate-blob-float-slower { animation: blob-float-slower 24s ease-in-out infinite; }
+
+@theme inline {
+  /* ...existing tokens... */
+  --color-foreground-secondary: var(--color-text-secondary);
+}
