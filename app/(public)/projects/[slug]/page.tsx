@@ -3,12 +3,11 @@ import Link from "next/link";
 import { ArrowLeft, ExternalLink } from "lucide-react";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import type { Metadata } from "next";
-import { getProjects, getProjectBySlug } from "@/features/projects/services";
-import type { Project } from "@/types/content";
+import { getProjectSlugs, getProjectBySlug } from "@/features/projects/services";
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
-  return projects.map((p: Project) => ({ slug: p.slug }));
+  const slugs = await getProjectSlugs();
+  return slugs.map((slug: string) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {

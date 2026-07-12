@@ -1,5 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Project } from "@/types/content";
+import { createStaticClient } from "@/lib/supabase/static";
 
 export async function getProjects(): Promise<Project[]> {
   const supabase = await createClient();
@@ -62,4 +63,18 @@ function mapProjectRow(row: {
     demoUrl: row.demo_url ?? undefined,
     isFeatured: row.is_featured,
   };
+}
+
+export async function getProjectSlugs(): Promise<string[]> {
+  const supabase = createStaticClient();
+  const { data, error } = await supabase
+    .from("projects")
+    .select("slug")
+    .eq("status", "published");
+
+  if (error) {
+    throw new Error(`Failed to load project slugs: ${error.message}`);
+  }
+
+  return (data ?? []).map((row) => row.slug);
 }
