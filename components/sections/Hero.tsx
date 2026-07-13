@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
@@ -74,9 +75,13 @@ export function Hero({ profile, socialLinks }: HeroProps) {
         </div>
 
         <div className="glass-card relative mx-auto flex aspect-square w-full max-w-sm items-center justify-center overflow-hidden rounded-full">
-          <span className="font-display text-6xl" style={{ color: "var(--color-accent)" }}>
-            YB
-          </span>
+          {profile.avatarUrl ? (
+            <Image src={profile.avatarUrl} alt={profile.fullName} fill className="object-cover" sizes="(max-width: 768px) 100vw, 384px" />
+          ) : (
+            <span className="font-display text-6xl" style={{ color: "var(--color-accent)" }}>
+              YB
+            </span>
+          )}
         </div>
       </div>
     </section>

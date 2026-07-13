@@ -4,13 +4,16 @@ import { CommandPalette } from "@/components/layout/CommandPalette";
 import { ScrollProgress } from "@/components/effects/ScrollProgress";
 import { BackToTop } from "@/components/effects/BackToTop";
 import { CursorGlow } from "@/components/effects/CursorGlow";
+import { getProfile } from "@/features/profile/services";
 
-export default function PublicLayout({ children }: { children: React.ReactNode }) {
+export default async function PublicLayout({ children }: { children: React.ReactNode }) {
+  const profile = await getProfile();
+
   return (
     <div className="relative min-h-screen">
       <ScrollProgress />
       <CursorGlow />
-      <CommandPalette />
+      <CommandPalette resumeUrl={profile.resumeUrl} />
       <Navbar />
       <main className="pt-16">{children}</main>
       <Footer />

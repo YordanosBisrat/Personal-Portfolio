@@ -79,36 +79,42 @@ export type Database = {
       }
       profile: {
         Row: {
+          avatar_path: string | null
           avatar_url: string | null
           bio: string
           email: string
           full_name: string
           id: string
           location: string
+          resume_path: string | null
           resume_url: string | null
           title: string
           updated_at: string
           years_learning: number
         }
         Insert: {
+          avatar_path?: string | null
           avatar_url?: string | null
           bio: string
           email: string
           full_name: string
           id?: string
           location: string
+          resume_path?: string | null
           resume_url?: string | null
           title: string
           updated_at?: string
           years_learning?: number
         }
         Update: {
+          avatar_path?: string | null
           avatar_url?: string | null
           bio?: string
           email?: string
           full_name?: string
           id?: string
           location?: string
+          resume_path?: string | null
           resume_url?: string | null
           title?: string
           updated_at?: string

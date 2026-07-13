@@ -12,6 +12,7 @@ export interface Profile {
   email: string;
   resumeUrl: string;
   yearsLearning: number;
+  avatarUrl: string | null
 }
 
 export type SkillCategory =

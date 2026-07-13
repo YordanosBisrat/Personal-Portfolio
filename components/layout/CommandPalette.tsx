@@ -17,7 +17,7 @@ import { SiGithub } from "@icons-pack/react-simple-icons";
 import { LinkedInIcon } from "@/components/icons/LinkedInIcon";
 import { SunMoon, FileDown, Code2 } from "lucide-react";
 
-export function CommandPalette() {
+export function CommandPalette({ resumeUrl }: { resumeUrl: string }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const { setTheme, theme } = useTheme();
@@ -71,7 +71,7 @@ export function CommandPalette() {
             </CommandItem>
           ))}
           <CommandItem
-            onSelect={() => runCommand(() => window.open("/resume", "_blank"))}
+            onSelect={() => runCommand(() => window.open(resumeUrl, "_blank"))}
           >
             <FileDown className="mr-2 h-4 w-4" />
             Download Resume
