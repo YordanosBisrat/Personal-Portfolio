@@ -77,6 +77,33 @@ export type Database = {
         }
         Relationships: []
       }
+      now_page: {
+        Row: {
+          current_goals: Json
+          currently_building: string
+          currently_learning: string
+          currently_reading: string
+          id: string
+          updated_at: string
+        }
+        Insert: {
+          current_goals?: Json
+          currently_building?: string
+          currently_learning?: string
+          currently_reading?: string
+          id?: string
+          updated_at?: string
+        }
+        Update: {
+          current_goals?: Json
+          currently_building?: string
+          currently_learning?: string
+          currently_reading?: string
+          id?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       profile: {
         Row: {
           avatar_path: string | null
