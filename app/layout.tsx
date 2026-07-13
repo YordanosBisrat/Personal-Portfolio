@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { playfairDisplay, inter } from "./fonts";
 import { ThemeProvider } from "@/components/layout/theme-provider";
 import "./globals.css";
+import "highlight.js/styles/github-dark.css";
 
 export const metadata: Metadata = {
   title: {

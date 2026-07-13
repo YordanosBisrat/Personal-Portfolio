@@ -50,7 +50,7 @@ export function ContactForm() {
       <div className="glass-card flex flex-col items-center gap-3 p-12 text-center">
         <CheckCircle2 className="h-8 w-8" style={{ color: "var(--color-accent)" }} />
         <p className="font-medium">Message sent</p>
-<p className="text-sm text-foreground-secondary">Thanks for reaching out — I&apos;ll get back to you soon.</p>
+        <p className="text-sm text-foreground-secondary">Thanks for reaching out — I&apos;ll get back to you soon.</p>
         <button onClick={() => setSubmitted(false)} className="focus-ring mt-2 text-sm underline" style={{ color: "var(--color-accent)" }}>
           Send another message
         </button>
@@ -84,10 +84,6 @@ export function ContactForm() {
         {errors.message && <p className="mt-1 text-xs text-red-400">{errors.message.message}</p>}
       </div>
       {submitError && <p className="text-sm text-red-400">{submitError}</p>}
-
-      <button type="submit" disabled={isSubmitting} className="focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium disabled:opacity-60" style={{ backgroundColor: "var(--color-accent)", color: "#151311" }}>
-        {isSubmitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
-      </button>
 
       <button type="submit" disabled={isSubmitting} className="focus-ring inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-medium disabled:opacity-60" style={{ backgroundColor: "var(--color-accent)", color: "#151311" }}>
         {isSubmitting ? "Sending..." : "Send Message"} <Send className="h-4 w-4" />
