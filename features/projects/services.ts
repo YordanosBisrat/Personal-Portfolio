@@ -1,6 +1,10 @@
 import { createClient } from "@/lib/supabase/server";
 import type { Project } from "@/types/content";
 import { createStaticClient } from "@/lib/supabase/static";
+import type { AdminProject } from "@/features/projects/types";
+import type { Database } from "@/types/database.types";
+
+type ProjectRow = Database["public"]["Tables"]["projects"]["Row"];
 
 export async function getProjects(): Promise<Project[]> {
   const supabase = await createClient();
@@ -77,4 +81,50 @@ export async function getProjectSlugs(): Promise<string[]> {
   }
 
   return (data ?? []).map((row) => row.slug);
+}
+
+export async function getAllProjectsAdmin(): Promise<AdminProject[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("projects")
+    .select("*")
+    .order("sort_order", { ascending: true });
+
+  if (error) {
+    throw new Error(`Failed to load projects: ${error.message}`);
+  }
+
+  return (data ?? []).map(mapAdminProjectRow);
+}
+
+export async function getProjectByIdAdmin(id: string): Promise<AdminProject | null> {
+  const supabase = await createClient();
+  const { data, error } = await supabase.from("projects").select("*").eq("id", id).maybeSingle();
+
+  if (error) {
+    throw new Error(`Failed to load project: ${error.message}`);
+  }
+
+  return data ? mapAdminProjectRow(data) : null;
+}
+
+function mapAdminProjectRow(row: ProjectRow): AdminProject {
+  return {
+    id: row.id,
+    slug: row.slug,
+    title: row.title,
+    category: row.category,
+    summary: row.summary,
+    problem: row.problem,
+    solution: row.solution,
+    features: row.features as string[],
+    challenges: row.challenges,
+    lessons: row.lessons,
+    techStack: row.tech_stack as string[],
+    githubUrl: row.github_url,
+    demoUrl: row.demo_url,
+    isFeatured: row.is_featured,
+    status: row.status as "draft" | "published",
+    sortOrder: row.sort_order,
+  };
 }
