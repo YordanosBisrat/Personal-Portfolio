@@ -14,6 +14,39 @@ export type Database = {
   }
   public: {
     Tables: {
+      certificates: {
+        Row: {
+          credential_url: string | null
+          file_path: string
+          file_url: string
+          id: string
+          issue_date: string
+          issuer: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          credential_url?: string | null
+          file_path: string
+          file_url: string
+          id?: string
+          issue_date: string
+          issuer: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          credential_url?: string | null
+          file_path?: string
+          file_url?: string
+          id?: string
+          issue_date?: string
+          issuer?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
@@ -247,7 +280,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
